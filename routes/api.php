@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\V1\CityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V2\EventController;
 
 Route::post('/auth/register', [UserController::class, 'register']);
 Route::post('/auth/login', [UserController::class, 'login']);
-Route::resource('cities', CityController::class);
+Route::resource('events', EventController::class);
 
 Route::middleware(['auth:api'])->group(function () {
 
