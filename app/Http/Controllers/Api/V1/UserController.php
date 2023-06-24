@@ -18,16 +18,7 @@ class UserController extends Controller
             'status' => true,
             'data' => $users
         ], 200);
-    }
-
-    public function user()
-    {
-        $user = Auth::user();
-        return response()->json([
-            'status' => true,
-            'data' => $user
-        ], 200);
-    }
+    }    
 
     public function register(Request $request)
     {
@@ -41,6 +32,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
+            'role' => $validatedData['role'],
             'password' => Hash::make($validatedData['password']),
         ]);        
 
@@ -50,6 +42,7 @@ class UserController extends Controller
             'status' => true,
             'message' => 'User created successfully',
             'access_token' => $accessToken,
+            'user' => $user,
         ], 200);
     }
 

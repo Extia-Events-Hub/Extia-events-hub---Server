@@ -42,7 +42,7 @@ class EventController extends Controller
                 ], 400);
             }
 
-            $event = new event($request->all());
+            $event = new Event($request->all());
             $event->user_id = $request->user()->id;
 
             if ($request->hasFile('image')) {
@@ -66,7 +66,7 @@ class EventController extends Controller
         }
     }
 
-    public function show(event $event)
+    public function show(Event $event)
     {
         try {
             return response()->json([
@@ -82,7 +82,7 @@ class EventController extends Controller
         }
     }
 
-    public function update(Request $request, event $event)
+    public function update(Request $request, Event $event)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -130,7 +130,7 @@ class EventController extends Controller
         }
     }
 
-    public function destroy(event $event)
+    public function destroy(Event $event)
     {
         try {            
             Cloudinary::destroy($event->image);            
