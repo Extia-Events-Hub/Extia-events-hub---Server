@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,7 +45,12 @@ class User extends Authenticatable
     ];
 
     //Relationship to City
-    public function users() {
+    public function cities() {
         return $this->HasToMany(City::class);
+    }
+
+    //Relationship to Event
+    public function events() {
+        return $this->HasToMany(Event::class);
     }
 }
