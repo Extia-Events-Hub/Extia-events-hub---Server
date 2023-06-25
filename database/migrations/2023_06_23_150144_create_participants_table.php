@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained('events')->onUpdate('cascade')->onDelete('cascade');
             $table->string('userName');
             $table->string('userEmail');
-            $table->boolean('check');
+            $table->boolean('check')->nullable();
             $table->timestamps();
         });
     }

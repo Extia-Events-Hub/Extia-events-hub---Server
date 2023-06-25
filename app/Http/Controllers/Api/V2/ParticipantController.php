@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Api\V2;
 
+use App\Mail\EventTicket;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ParticipantController extends Controller
 {
     public function index()
     {
-        $participants = Participant::all(); 
+        $participants = Participant::all();
         return response()->json([
             'status' => true,
             'data' => $participants
@@ -24,9 +25,9 @@ class ParticipantController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'userName' => 'required',
-                'userEmail' => 'required',                
-                'check' => 'nullable',                
-                'event_id' => 'required',                            
+                'userEmail' => 'required',
+                'check' => 'nullable',
+                'event_id' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -36,15 +37,14 @@ class ParticipantController extends Controller
                 ], 400);
             }
 
-            $participant = new Participant($request->all());
-            // $participant->user_id = $request->user()->id;
 
-            // if ($request->hasFile('image')) {
-            //     $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-            //     $participant->image = $uploadedFileUrl;
-            // }
+            $participant = new Participant($request->all());
+
 
             $participant->save();
+
+            $email = new EventTicket($request->input('userEmail'));
+            Mail::send($email);
 
             return response()->json([
                 'status' => true,
@@ -81,9 +81,9 @@ class ParticipantController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'userName' => 'required',
-                'userEmail' => 'required',                
-                'check' => 'nullable',                
-                'event_id' => 'required',                            
+                'userEmail' => 'required',
+                'check' => 'nullable',
+                'event_id' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -95,12 +95,6 @@ class ParticipantController extends Controller
 
             $participant->fill($request->all());
 
-            // if ($request->hasFile('image')) {
-            //     Cloudinary::destroy($participant->image);
-            //     $uploadedFile = $request->file('image');                
-            //     $uploadResult = Cloudinary::upload($uploadedFile->getRealPath());
-            //     $participant->image = $uploadResult->getSecurePath();
-            // }
 
             $participant->save();
 
@@ -120,8 +114,7 @@ class ParticipantController extends Controller
 
     public function destroy(Participant $participant)
     {
-        try {            
-            // Cloudinary::destroy($participant->image);            
+        try {
             $participant->delete();
 
             return response()->json([
