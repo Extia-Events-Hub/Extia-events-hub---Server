@@ -19,10 +19,10 @@ Route::middleware(['auth:api'])->group(function () {
     
     Route::get('logout', [UserController::class, 'logout']);   
     
-    Route::middleware(['superadmin'])->group(function () {
+    // Route::middleware(['superadmin'])->group(function () {
         Route::apiResource('events', EventController::class);
         Route::apiResource('participants', ParticipantController::class);
         Route::apiResource('users', UserController::class);        
-    });   
+    // });   
     
 });
