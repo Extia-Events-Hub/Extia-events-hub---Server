@@ -30,6 +30,8 @@ class ParticipantController extends Controller
                 'event_id' => 'required',
             ]);
 
+            
+
             if ($validator->fails()) {
                 return response()->json([
                     'status' => false,
@@ -37,9 +39,7 @@ class ParticipantController extends Controller
                 ], 400);
             }
 
-
             $participant = new Participant($request->all());
-
 
             $participant->save();
 
