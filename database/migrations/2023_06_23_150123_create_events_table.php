@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade'); 
-            $table->string('title');
-            $table->string('shortDescription');
-            $table->string('longDescription');
-            $table->string('mode');
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->time('startTime');
-            $table->time('endTime');
-            $table->string('image');
+            $table->json('title');
+            $table->json('shortDescription');
+            $table->json('longDescription');
+            $table->json('mode');
+            $table->json('startDate');
+            $table->json('endDate');
+            $table->json('startTime');
+            $table->json('endTime');
+            $table->json('image');
             $table->timestamps();
         });
     }

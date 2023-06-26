@@ -31,7 +31,7 @@ class EventController extends Controller
                 'endDate'=> 'nullable',
                 'startTime' => 'required',
                 'endTime' => 'nullable',                
-                'image' => 'required|image|mimes:png,jpg,jpeg',  
+                'image' => 'required|image|mimes:png,jpg,jpeg,webp',  
                 'user_id' => 'required',              
             ]);
 

@@ -22,6 +22,19 @@ class Event extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'title'=> 'json',      
+        'shortDescription' => 'json',
+        'longDescription' => 'json',
+        'mode'=> 'json',
+        'startDate'=> 'json',
+        'endDate'=> 'json',
+        'startTime'=> 'json',
+        'endTime'=> 'json',
+        'image'=> 'json',      
+        'user_id'=> 'json',
+    ];
+
     //Relationship to User
     public function users() {
         return $this->belongsTo(User::class);
