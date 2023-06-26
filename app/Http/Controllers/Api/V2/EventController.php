@@ -32,7 +32,8 @@ class EventController extends Controller
                 'startTime' => 'required',
                 'endTime' => 'nullable',                
                 'image' => 'required|image|mimes:png,jpg,jpeg,webp',  
-                'user_id' => 'required',              
+                'user_id' => 'required',   
+                'max_participants' => 'required',             
             ]);
 
             if ($validator->fails()) {
@@ -94,8 +95,9 @@ class EventController extends Controller
                 'endDate'=> 'nullable',
                 'startTime' => 'required',
                 'endTime' => 'nullable',                
-                'image' => 'required|image|mimes:png,jpg,jpeg',  
-                'user_id' => 'required',              
+                'image' => 'required|image|mimes:png,jpg,jpeg,webp',  
+                'user_id' => 'required',   
+                'max_participants' => 'required',           
             ]);
 
             if ($validator->fails()) {

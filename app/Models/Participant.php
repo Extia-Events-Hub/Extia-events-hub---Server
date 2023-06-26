@@ -18,6 +18,6 @@ class Participant extends Model
 
     //Relationship to Event
     public function events() {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'event_id');
     }
 }

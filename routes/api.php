@@ -14,6 +14,7 @@ Route::post('login', [UserController::class, 'login']);
 Route::get('events', [EventController::class, 'index']);
 Route::get('events/{event}', [EventController::class, 'show']);
 Route::post('participants', [ParticipantController::class, 'store']);
+Route::get('/events/{eventId}/participants/count', [ParticipantController::class, 'getParticipantCount']);
 
 Route::middleware(['auth:api'])->group(function () {
     

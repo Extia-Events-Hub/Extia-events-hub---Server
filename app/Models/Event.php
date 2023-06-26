@@ -20,23 +20,25 @@ class Event extends Model
         'endTime',
         'image',       
         'user_id',
+        'max_participants',
     ];
 
     protected $casts = [
-        'title'=> 'json',      
-        'shortDescription' => 'json',
-        'longDescription' => 'json',
-        'mode'=> 'json',
-        'startDate'=> 'json',
-        'endDate'=> 'json',
-        'startTime'=> 'json',
-        'endTime'=> 'json',
-        'image'=> 'json',      
-        'user_id'=> 'json',
+        'title' => 'array',
+        'shortDescription' => 'array',
+        'longDescription' => 'array',
+        'mode' => 'array',
+        // 'startDate' => 'array',
+        // 'endDate' => 'array',
+        // 'startTime' => 'array',
+        // 'endTime' => 'array',
+        'image' => 'array',
+        'user_id' => 'integer',
+        'max_participants'  => 'integer',
     ];
 
     //Relationship to User
-    public function users() {
-        return $this->belongsTo(User::class);
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -18,11 +18,12 @@ return new class extends Migration
             $table->json('shortDescription');
             $table->json('longDescription');
             $table->json('mode');
-            $table->json('startDate');
-            $table->json('endDate');
-            $table->json('startTime');
-            $table->json('endTime');
-            $table->json('image');
+            $table->date('startDate');
+            $table->date('endDate');
+            $table->time('startTime');
+            $table->time('endTime');
+            $table->string('image');
+            $table->integer('max_participants');
             $table->timestamps();
         });
     }
