@@ -29,6 +29,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::delete('events/{event}', [EventController::class, 'destroy']);
 
         Route::get('participants', [ParticipantController::class, 'index']);
+        Route::get('participants/{participant}', [ParticipantController::class, 'show']);
         Route::put('participants/{participant}', [ParticipantController::class, 'update']);
         Route::delete('participants', [ParticipantController::class, 'destroy']);
     });   
