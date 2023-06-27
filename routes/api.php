@@ -23,7 +23,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::middleware(['superadmin'])->group(function () {
 
         Route::get('users', [UserController::class, 'index']);
-        Route::post('users/{user}', [UserController::class, 'show']);
+        Route::get('users/{user}', [UserController::class, 'show']);
 
         Route::post('events', [EventController::class, 'store']);
         Route::put('events/{event}', [EventController::class, 'update']);
