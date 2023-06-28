@@ -22,7 +22,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
+            $validator = Validator::make( [
                 'name' => 'required',                
                 'logo' => 'required|image|mimes:png,jpg,jpeg',                
             ]);
@@ -77,7 +77,7 @@ class CityController extends Controller
     public function update(Request $request, City $City)
     {
         try {
-            $validator = Validator::make($request->all(), [
+            $validator = Validator::make([
                 'name' => 'required',                
                 'logo' => 'required|image|mimes:png,jpg,jpeg',                
             ]);
