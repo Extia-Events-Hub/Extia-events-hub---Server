@@ -22,6 +22,7 @@ class EventTicket extends Mailable
     protected $mode;
     protected $date;
     protected $time;
+    protected $id;
 
     /**
      * Create a new message instance.
@@ -31,8 +32,9 @@ class EventTicket extends Mailable
         $this->userName = $userName;
         $this->userEmail = $userEmail;
         $event = Event::findOrFail($eventId);
-        $this->title = $event->title;
-        $this->mode = $event->mode;
+        $this ->id = $event->id;
+        $this->title = $event->title ?? '';
+        $this->mode = $event->mode ?? '';
         $this->date = $event->startDate;
         $this->time = $event->startTime;
     }
@@ -50,6 +52,7 @@ class EventTicket extends Mailable
                 'mode' => $this->mode,
                 'date' => $this->date,
                 'time' => $this->time,
+                'id' => $this->id,
             ]);
     }
 }
