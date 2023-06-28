@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory;    
 
     protected $fillable = [
         'title',
@@ -27,11 +27,7 @@ class Event extends Model
         'title' => 'array',
         'shortDescription' => 'array',
         'longDescription' => 'array',
-        'mode' => 'array',
-        // 'startDate' => 'array',
-        // 'endDate' => 'array',
-        // 'startTime' => 'array',
-        // 'endTime' => 'array',
+        'mode' => 'array',        
         'image' => 'array',
         'user_id' => 'integer',
         'max_participants'  => 'integer',
