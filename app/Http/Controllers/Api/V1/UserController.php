@@ -8,17 +8,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+// use Laravel\Passport\RefreshToken;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10); 
+        $users = User::paginate(10);
         return response()->json([
             'status' => true,
             'data' => $users
         ], 200);
-    }    
+    }
 
     public function register(Request $request)
     {
@@ -34,7 +35,7 @@ class UserController extends Controller
             'email' => $validatedData['email'],
             'role' => $validatedData['role'],
             'password' => Hash::make($validatedData['password']),
-        ]);        
+        ]);
 
         $accessToken = $user->createToken('API Token')->accessToken;
 
@@ -61,12 +62,38 @@ class UserController extends Controller
 
         $accessToken = auth()->user()->createToken('API Token')->accessToken;
 
+        
+
         return response()->json([
             'status' => true,
             'message' => 'User Logged In successfully',
             'access_token' => $accessToken,
         ], 200);
     }
+
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+    //     if (!auth()->attempt($credentials)) {
+    //         throw ValidationException::withMessages([
+    //             'email' => ['Invalid credentials'],
+    //         ]);
+    //     }
+    //     $accessToken = auth()->user()->createToken('API Token')->accessToken;
+    //     $refreshToken = $accessToken->refreshToken;
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'User Logged In successfully',
+    //         'access_token' => $accessToken,
+    //         'refresh_token' => $refreshToken->refresh_token,
+    //     ], 200);
+    // }
+
+
+    //
 
     public function logout(Request $request)
     {
@@ -81,5 +108,22 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         return response($user, 201);
+    }
+
+
+    public function getRefreshToken(Request $request)
+    {
+        $refreshToken = $request->user()->tokens()->where('name', 'API Token')->first();
+        if (!$refreshToken) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Refresh token not found',
+            ], 404);
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'Refresh token obtained successfully',
+            'refresh_token' => $refreshToken->id,
+        ], 200);
     }
 }
